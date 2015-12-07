@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+categories_list = []
+[{ name: 'adventure' }, { name: 'fashion' }, { name: 'science' }, { name: 'history' }, { name: 'recipe' }, { name: 'culture' }, { name: 'short story' }, { name: 'sweet memories' }].each do |cat|
+  unless Category.find_by(name: cat[:name])
+    categories_list << cat
+    puts cat[:name]
+  end
+end
+categories = Category.create(categories_list)
