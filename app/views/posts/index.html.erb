@@ -1,0 +1,30 @@
+<%= link_to 'New', new_post_path, :class => 'btn btn-primary' %>
+
+<h1>My Posts</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Preview</th>
+      <th>Created at</th>
+      <th>views</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |p| %>
+      <tr>
+        <td><%= link_to p.title, post_path(p) %></td>
+        <td><%= link_to 'preview', post_view_path(p), :class => 'btn btn-mini' %></td>
+        <td><%= p.created_at %></td>
+        <td><%= p.total_views %></td>
+        <td>
+          <%= link_to 'Edit', edit_post_path(p), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', post_path(p), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
