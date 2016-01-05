@@ -46,5 +46,6 @@ group :development do
 end
 
 gem 'devise'
-gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
+gem 'pry', :group => :development
+gem 'friendly_id', '~> 5.1.0'

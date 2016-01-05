@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       flash[:notice] = "Post saved successfully."  
       redirect_to posts_path
@@ -21,10 +21,29 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.friendly.find(params[:id])  
+  end
+
+  def edit
+    @post = Post.friendly.find(params[:id])
+  end
+
+  def update
+    @post = Post.friendly.find(params[:id])
+    if @post && @post.update_attributes(post_params)
+      flash[:notice] = "post updated successfully"
+      redirect_to posts_path
+    else
+      flash[:notice] = "Something went wrong :("
+    end
+  end
+
+
   private
 
   def post_params
-    params.require(:post).permit(:category_id, :title, :content, :tags[])
+    params.require(:post).permit(:category_id, :title, :content, :tags => [])
   end
 
 end
